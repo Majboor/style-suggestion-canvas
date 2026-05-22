@@ -153,3 +153,185 @@
 .transition-all-500 {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* =========================================================================
+   Editorial landing theme — scoped under .editorial so the rest of the app
+   (tester / docs / status) keeps its existing shadcn look untouched.
+   A fashion-magazine aesthetic: warm bone paper, ink black, vermilion accent,
+   a distinctive Fraunces display serif over Instrument Sans body.
+   ========================================================================= */
+.editorial {
+  --paper: 42 33% 94%;
+  --paper-deep: 40 26% 90%;
+  --ink: 48 18% 7%;
+  --ink-soft: 40 8% 32%;
+  --ink-faint: 40 6% 52%;
+  --flame: 12 82% 52%;
+  --flame-deep: 10 78% 44%;
+  --line: 40 14% 82%;
+
+  background-color: hsl(var(--paper));
+  color: hsl(var(--ink));
+  font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+.editorial ::selection {
+  background: hsl(var(--flame));
+  color: hsl(var(--paper));
+}
+
+.font-display {
+  font-family: "Fraunces", ui-serif, Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+.font-mono-e {
+  font-family: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Fine paper grain + a soft vignette for depth */
+.editorial-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.hairline {
+  border-color: hsl(var(--line));
+}
+
+.eyebrow {
+  font-family: "Space Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.68rem;
+}
+
+/* Underline that draws in on hover */
+.link-draw {
+  position: relative;
+}
+.link-draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-draw:hover::after {
+  transform: scaleX(1);
+}
+
+/* Staggered reveal on load */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Marquee ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 32s linear infinite;
+}
+.editorial .marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Feature card lift */
+.feature-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px -28px hsl(var(--ink) / 0.35);
+}
+.feature-card:hover .feature-arrow {
+  transform: translate(4px, -4px);
+}
+.feature-arrow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Live status dot */
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.dot-ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: hsl(var(--flame));
+  animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .marquee-track, .dot-ping::after { animation: none; }
+  .rise { opacity: 1; transform: none; }
+}
+
+/* Visible keyboard focus for all interactive elements */
+@layer base {
+  :where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+}
+
+/* Skip-to-content link: hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* Respect users who prefer reduced motion: neutralize animations/transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-appear {
+    animation: none;
+  }
+}
