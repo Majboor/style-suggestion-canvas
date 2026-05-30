@@ -167,18 +167,25 @@ const ImageCard = ({
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg w-full max-w-md mx-auto animate-appear">
       <div className="relative w-full pb-[125%]">
         {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-gray-100"
+            role="status"
+            aria-live="polite"
+          >
             <div className="animate-pulse flex space-x-2">
-              <Loader2 className="h-8 w-8 text-apple-blue animate-spin" />
+              <Loader2 className="h-8 w-8 text-apple-blue animate-spin" aria-hidden="true" />
             </div>
+            <span className="sr-only">Loading style suggestion…</span>
           </div>
         )}
-        
+
         {imageUrl && (
-          <img 
-            src={imageUrl} 
-            alt="Style suggestion" 
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`} 
+          <img
+            src={imageUrl}
+            alt={`Fashion style suggestion${currentStyle ? ` in the ${currentStyle} style` : ''}, iteration ${iteration} of 30`}
+            loading="lazy"
+            decoding="async"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={() => setImageLoaded(true)}
             onError={() => {
               toast.error("Failed to load image", {
@@ -204,31 +211,35 @@ const ImageCard = ({
       </div>
       
       <div className="p-4 flex justify-center space-x-4">
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           className={`transition-all-200 ${feedback === 'dislike' ? 'bg-red-50 text-red-600 border-red-200' : ''}`}
           disabled={isLoading || isCompleted || !imageUrl}
           onClick={() => handleFeedback('dislike')}
+          aria-pressed={feedback === 'dislike'}
+          aria-label="Dislike this style suggestion"
         >
           {isLoading && feedback === 'dislike' ? (
-            <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+            <Loader2 className="h-4 w-4 mr-1 animate-spin" aria-hidden="true" />
           ) : (
-            <ThumbsDown className="h-4 w-4 mr-1" />
+            <ThumbsDown className="h-4 w-4 mr-1" aria-hidden="true" />
           )}
           Dislike
         </Button>
-        
-        <Button 
-          size="sm" 
+
+        <Button
+          size="sm"
           className={`transition-all-200 bg-apple-blue hover:bg-apple-blue-light text-white ${feedback === 'like' ? 'bg-green-600 hover:bg-green-700' : ''}`}
           disabled={isLoading || isCompleted || !imageUrl}
           onClick={() => handleFeedback('like')}
+          aria-pressed={feedback === 'like'}
+          aria-label="Like this style suggestion"
         >
           {isLoading && feedback === 'like' ? (
-            <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+            <Loader2 className="h-4 w-4 mr-1 animate-spin" aria-hidden="true" />
           ) : (
-            <ThumbsUp className="h-4 w-4 mr-1" />
+            <ThumbsUp className="h-4 w-4 mr-1" aria-hidden="true" />
           )}
           Like
         </Button>

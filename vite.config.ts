@@ -14,4 +14,19 @@ export default defineConfig(() => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Split large third-party dependencies into their own long-term-cacheable
+    // chunks so the app code and vendor code can be cached independently and
+    // the initial payload stays lean.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          charts: ["recharts"],
+          query: ["@tanstack/react-query"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 700,
+  },
 }));
