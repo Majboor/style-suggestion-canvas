@@ -178,22 +178,22 @@ const ApiStatus = () => {
                 {services.map((service, index) => (
                   <div key={index} className="border rounded-lg p-4">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
-                      <div className="flex flex-col gap-2 mb-3 sm:mb-0">
-                        <div className="flex items-center gap-2">
+                      <div className="flex flex-col gap-2 mb-3 sm:mb-0 min-w-0">
+                        <div className="flex items-center flex-wrap gap-2">
                           <h3 className="font-bold uppercase">{service.name}</h3>
                           {getStatusBadge(service.status)}
                         </div>
-                        <a 
-                          href={service.url} 
-                          target="_blank" 
+                        <a
+                          href={service.url}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:underline text-sm flex items-center gap-1"
+                          className="text-blue-600 hover:underline text-sm inline-flex items-start gap-1 break-all py-1"
                         >
-                          {service.url}
-                          <ExternalLink className="h-3 w-3" />
+                          <span className="break-all">{service.url}</span>
+                          <ExternalLink className="h-3 w-3 shrink-0 mt-1" />
                         </a>
                       </div>
-                      <div className="text-right">
+                      <div className="text-left sm:text-right shrink-0">
                         <p className="text-sm text-muted-foreground">
                           {service.uptime}% in the last 30 days
                         </p>

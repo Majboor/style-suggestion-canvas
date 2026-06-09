@@ -33,7 +33,9 @@ import {
   Plus,
   HelpCircle,
   BookText,
-  Activity
+  Activity,
+  Terminal,
+  Sparkles
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -349,6 +351,12 @@ const StyleAPI = () => {
             <h1 className="text-2xl font-medium text-apple-black">Style API Tester</h1>
           </div>
           <div className="flex items-center space-x-4">
+            <Link to="/api-console">
+              <Button variant="outline" size="sm" className="flex items-center gap-1">
+                <Terminal className="h-4 w-4" />
+                <span className="hidden sm:inline">API Console</span>
+              </Button>
+            </Link>
             <Link to="/api-status">
               <Button variant="outline" size="sm" className="flex items-center gap-1">
                 <Activity className="h-4 w-4" />
@@ -369,17 +377,17 @@ const StyleAPI = () => {
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue={styleApiClient.isAuthenticated ? "suggestion" : "auth"} className="space-y-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
-            <TabsList className="glass-effect">
-              <TabsTrigger value="auth" className="flex items-center space-x-1">
-                <Key className="h-4 w-4" />
+            <TabsList className="glass-effect h-auto flex-wrap w-full sm:w-auto">
+              <TabsTrigger value="auth" className="flex items-center space-x-1 min-h-11 py-2 flex-1 sm:flex-none">
+                <Key className="h-4 w-4 shrink-0" />
                 <span>Authentication</span>
               </TabsTrigger>
-              <TabsTrigger value="suggestion" className="flex items-center space-x-1">
-                <ImageIcon className="h-4 w-4" />
+              <TabsTrigger value="suggestion" className="flex items-center space-x-1 min-h-11 py-2 flex-1 sm:flex-none">
+                <ImageIcon className="h-4 w-4 shrink-0" />
                 <span>Suggestions</span>
               </TabsTrigger>
-              <TabsTrigger value="profile" className="flex items-center space-x-1">
-                <BarChart4 className="h-4 w-4" />
+              <TabsTrigger value="profile" className="flex items-center space-x-1 min-h-11 py-2 flex-1 sm:flex-none">
+                <BarChart4 className="h-4 w-4 shrink-0" />
                 <span>Profile</span>
               </TabsTrigger>
             </TabsList>
@@ -495,7 +503,7 @@ const StyleAPI = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm">Health Check</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded">
+                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded break-all overflow-x-auto">
                     <p>GET /api</p>
                     <p className="mt-2">Response:</p>
                     <p>{`{ "status": "ok" }`}</p>
@@ -506,7 +514,7 @@ const StyleAPI = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm">Create Preference</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded">
+                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded break-all overflow-x-auto">
                     <p>POST /api/preference</p>
                     <p className="mt-2">Headers:</p>
                     <p>Content-Type: application/json</p>
@@ -519,7 +527,7 @@ const StyleAPI = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm">Process Iteration</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded">
+                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded break-all overflow-x-auto">
                     <p>POST /api/preference/{"{preference_id}"}/iteration/{"{iteration_id}"}</p>
                     <p className="mt-2">Headers:</p>
                     <p>Content-Type: application/json</p>
@@ -533,7 +541,7 @@ const StyleAPI = () => {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm">Get/Save Profile</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded">
+                  <CardContent className="text-xs font-mono bg-gray-50 p-4 rounded break-all overflow-x-auto">
                     <p>GET/POST /api/preference/{"{preference_id}"}/profile</p>
                     <p className="mt-2">Headers:</p>
                     <p>AI-ID: string</p>
@@ -570,7 +578,7 @@ const StyleAPI = () => {
               <div className="space-y-6">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                   <h2 className="text-2xl font-medium">Style Suggestions</h2>
-                  <div className="flex space-x-2">
+                  <div className="flex flex-wrap justify-center gap-2">
                     <Button
                       variant="outline"
                       onClick={loadProfile}
@@ -684,19 +692,20 @@ const StyleAPI = () => {
                     
                     <div className="space-y-2">
                       <Label>Create New Preference</Label>
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:space-x-2 sm:gap-0">
                         <Input
                           value={accessId}
                           onChange={(e) => setAccessId(e.target.value)}
                           placeholder="Enter access ID for new preference"
                           disabled={isCreatingPreference}
+                          className="min-w-0"
                         />
-                        <Select 
-                          value={gender} 
+                        <Select
+                          value={gender}
                           onValueChange={setGender}
                           disabled={isCreatingPreference}
                         >
-                          <SelectTrigger className="w-32">
+                          <SelectTrigger className="w-full sm:w-32 shrink-0">
                             <SelectValue placeholder="Gender" />
                           </SelectTrigger>
                           <SelectContent>
@@ -842,9 +851,15 @@ const StyleAPI = () => {
               </Card>
             ) : (
               <div className="space-y-6">
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
                   <h2 className="text-2xl font-medium">Your Style Profile</h2>
-                  <div className="space-x-2">
+                  <div className="flex flex-wrap gap-2">
+                    <Link to="/style-card">
+                      <Button variant="outline" className="border-apple-blue text-apple-blue">
+                        <Sparkles className="h-4 w-4 mr-1" />
+                        Style Card
+                      </Button>
+                    </Link>
                     <Button
                       variant="outline"
                       onClick={loadProfile}

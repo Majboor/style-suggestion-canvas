@@ -20,12 +20,12 @@ const ApiDocs = () => {
   return (
     <div className="min-h-screen bg-apple-gray">
       <header className="bg-white bg-opacity-90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <BookText className="h-6 w-6 text-apple-blue" />
-            <h1 className="text-2xl font-medium text-apple-black">Style API Documentation</h1>
+        <div className="container mx-auto px-4 py-4 flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+          <div className="flex items-center space-x-2 min-w-0">
+            <BookText className="h-6 w-6 text-apple-blue shrink-0" />
+            <h1 className="text-lg sm:text-2xl font-medium text-apple-black truncate">Style API Documentation</h1>
           </div>
-          <Badge variant="outline" className="font-mono text-xs">
+          <Badge variant="outline" className="font-mono text-xs max-w-full break-all self-start sm:self-auto">
             Base URL: https://haider.techrealm.online/api
           </Badge>
         </div>
@@ -79,7 +79,7 @@ const ApiDocs = () => {
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-5 w-5"
+                            className="h-7 w-7 shrink-0"
                             onClick={() => copyToClipboard("AI_test_user_123_2d550589", "test-ai-id")}
                           >
                             {copiedEndpoint === "test-ai-id" ? (
@@ -153,15 +153,15 @@ const ApiDocs = () => {
                 {/* Health Check */}
                 <Card id="health-check" className="scroll-mt-24">
                   <CardHeader className="bg-gray-50 border-b">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                      <CardTitle className="flex items-center gap-2 flex-wrap min-w-0">
                         <Badge className="bg-green-500">GET</Badge>
-                        <span>/api</span>
+                        <span className="break-all">/api</span>
                       </CardTitle>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-xs"
+                        className="text-xs shrink-0 self-start sm:self-auto"
                         onClick={() => copyToClipboard("https://haider.techrealm.online/api", "health-check")}
                       >
                         {copiedEndpoint === "health-check" ? (
@@ -179,7 +179,7 @@ const ApiDocs = () => {
                   </CardHeader>
                   <CardContent className="pt-6">
                     <Tabs defaultValue="response">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="response">Response</TabsTrigger>
                         <TabsTrigger value="curl">cURL</TabsTrigger>
                       </TabsList>
@@ -206,15 +206,15 @@ const ApiDocs = () => {
                 {/* Create Preference */}
                 <Card id="create-preference" className="scroll-mt-24">
                   <CardHeader className="bg-gray-50 border-b">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                      <CardTitle className="flex items-center gap-2 flex-wrap min-w-0">
                         <Badge className="bg-blue-500">POST</Badge>
-                        <span>/api/preference</span>
+                        <span className="break-all">/api/preference</span>
                       </CardTitle>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-xs"
+                        className="text-xs shrink-0 self-start sm:self-auto"
                         onClick={() => copyToClipboard("https://haider.techrealm.online/api/preference", "create-preference")}
                       >
                         {copiedEndpoint === "create-preference" ? (
@@ -232,7 +232,7 @@ const ApiDocs = () => {
                   </CardHeader>
                   <CardContent className="pt-6">
                     <Tabs defaultValue="request">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="request">Request</TabsTrigger>
                         <TabsTrigger value="response">Response</TabsTrigger>
                         <TabsTrigger value="curl">cURL</TabsTrigger>
@@ -273,15 +273,15 @@ const ApiDocs = () => {
                 {/* Process Iteration */}
                 <Card id="process-iteration" className="scroll-mt-24">
                   <CardHeader className="bg-gray-50 border-b">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                      <CardTitle className="flex items-center gap-2 flex-wrap min-w-0">
                         <Badge className="bg-blue-500">POST</Badge>
-                        <span>/api/preference/{"{preference_id}"}/iteration/{"{iteration_id}"}</span>
+                        <span className="break-all">/api/preference/{"{preference_id}"}/iteration/{"{iteration_id}"}</span>
                       </CardTitle>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-xs"
+                        className="text-xs shrink-0 self-start sm:self-auto"
                         onClick={() => copyToClipboard("https://haider.techrealm.online/api/preference/{preference_id}/iteration/{iteration_id}", "process-iteration")}
                       >
                         {copiedEndpoint === "process-iteration" ? (
@@ -314,7 +314,7 @@ iteration_id  - Number 1-30`}
                     </div>
 
                     <Tabs defaultValue="requestEarly">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="requestEarly">Request (Iterations 1-29)</TabsTrigger>
                         <TabsTrigger value="requestFinal">Request (Iteration 30)</TabsTrigger>
                         <TabsTrigger value="responseEarly">Response (Iterations 1-29)</TabsTrigger>
@@ -389,15 +389,15 @@ curl -X POST "https://haider.techrealm.online/api/preference/550e8400-e29b-41d4-
                 {/* Save Profile */}
                 <Card id="save-profile" className="scroll-mt-24">
                   <CardHeader className="bg-gray-50 border-b">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                      <CardTitle className="flex items-center gap-2 flex-wrap min-w-0">
                         <Badge className="bg-blue-500">POST</Badge>
-                        <span>/api/preference/{"{preference_id}"}/profile</span>
+                        <span className="break-all">/api/preference/{"{preference_id}"}/profile</span>
                       </CardTitle>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-xs"
+                        className="text-xs shrink-0 self-start sm:self-auto"
                         onClick={() => copyToClipboard("https://haider.techrealm.online/api/preference/{preference_id}/profile", "save-profile")}
                       >
                         {copiedEndpoint === "save-profile" ? (
@@ -422,7 +422,7 @@ curl -X POST "https://haider.techrealm.online/api/preference/550e8400-e29b-41d4-
                     </div>
 
                     <Tabs defaultValue="response">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="response">Response</TabsTrigger>
                         <TabsTrigger value="curl">cURL</TabsTrigger>
                       </TabsList>
@@ -450,15 +450,15 @@ curl -X POST "https://haider.techrealm.online/api/preference/550e8400-e29b-41d4-
                 {/* Get Profile */}
                 <Card id="get-profile" className="scroll-mt-24">
                   <CardHeader className="bg-gray-50 border-b">
-                    <div className="flex justify-between items-center">
-                      <CardTitle className="flex items-center gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+                      <CardTitle className="flex items-center gap-2 flex-wrap min-w-0">
                         <Badge className="bg-green-500">GET</Badge>
-                        <span>/api/preference/{"{preference_id}"}/profile</span>
+                        <span className="break-all">/api/preference/{"{preference_id}"}/profile</span>
                       </CardTitle>
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-xs"
+                        className="text-xs shrink-0 self-start sm:self-auto"
                         onClick={() => copyToClipboard("https://haider.techrealm.online/api/preference/{preference_id}/profile", "get-profile")}
                       >
                         {copiedEndpoint === "get-profile" ? (
@@ -483,7 +483,7 @@ curl -X POST "https://haider.techrealm.online/api/preference/550e8400-e29b-41d4-
                     </div>
 
                     <Tabs defaultValue="response">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="response">Response</TabsTrigger>
                         <TabsTrigger value="curl">cURL</TabsTrigger>
                       </TabsList>
@@ -578,7 +578,7 @@ curl -X POST "https://haider.techrealm.online/api/preference/550e8400-e29b-41d4-
                   </CardHeader>
                   <CardContent>
                     <Tabs defaultValue="python">
-                      <TabsList>
+                      <TabsList className="flex-wrap h-auto">
                         <TabsTrigger value="python">Python</TabsTrigger>
                         <TabsTrigger value="javascript">JavaScript</TabsTrigger>
                         <TabsTrigger value="curl">cURL</TabsTrigger>
