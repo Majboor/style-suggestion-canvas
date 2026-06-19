@@ -1,3 +1,4 @@
+import { loggedFetch } from "./apiLog";
 
 interface AuthResponse {
   preference_id: string;
@@ -106,7 +107,7 @@ class StyleApiClient {
 
   async authenticate(accessId: string, gender: string): Promise<AuthResponse> {
     try {
-      const response = await fetch(`${this.apiBaseUrl}/preference`, {
+      const response = await loggedFetch(`${this.apiBaseUrl}/preference`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -177,7 +178,7 @@ class StyleApiClient {
       
       // Call the API with the next iteration number
       try {
-        const response = await fetch(
+        const response = await loggedFetch(
           `${this.apiBaseUrl}/preference/${this.preferenceId}/iteration/${nextIteration}`,
           {
             method: "POST",
@@ -251,7 +252,7 @@ class StyleApiClient {
     }
 
     try {
-      const response = await fetch(
+      const response = await loggedFetch(
         `${this.apiBaseUrl}/preference/${this.preferenceId}/profile`,
         {
           method: "POST",
@@ -285,7 +286,7 @@ class StyleApiClient {
       // Add delay to ensure API has time to process recent feedback
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const response = await fetch(
+      const response = await loggedFetch(
         `${this.apiBaseUrl}/preference/${this.preferenceId}/profile`,
         {
           method: "GET",
@@ -323,7 +324,7 @@ class StyleApiClient {
 
   async checkApiHealth(): Promise<{status: string}> {
     try {
-      const response = await fetch(this.apiBaseUrl);
+      const response = await loggedFetch(this.apiBaseUrl);
       if (!response.ok) {
         throw new Error("API health check failed");
       }
