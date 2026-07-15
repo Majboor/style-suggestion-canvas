@@ -1,59 +1,95 @@
 # Style Suggestion Canvas 🎨
 
-A hands-on **playground for the Style Preference API** — the little API that learns what you
-*actually* like by watching you swipe through outfits. Point it at a running Style API server,
-authenticate, rate a stream of fashion images with a simple like / dislike, and watch a
-personalized style profile take shape in real time.
+<p>
+  <a href="https://ethos.techrealm.online"><img alt="Live demo" src="https://img.shields.io/badge/demo-ethos.techrealm.online-E8481F?logo=cloudflare&logoColor=white" /></a>
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green" />
+  <img alt="React 18" src="https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" />
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white" />
+  <img alt="Tested with Vitest + Playwright" src="https://img.shields.io/badge/tests-vitest%20%2B%20playwright-6E9F18?logo=vitest&logoColor=white" />
+</p>
 
-Think of it as a REST client that happens to have great taste.
+> ### Taste, turned into a profile.
+> A hands-on **playground for the Style Preference API** — the little API that learns what you *actually* like by watching you swipe through outfits. It's a REST client that happens to have great taste.
+>
+> **Live → [ethos.techrealm.online](https://ethos.techrealm.online)**
 
-> Built with React + Vite + TypeScript + Tailwind + shadcn/ui. No backend of its own — it's a
-> pure front-end tester that talks to any compatible Style API endpoint.
+<p align="center">
+  <img src="docs/media/demo.gif" alt="A tour of Style Suggestion Canvas — editorial landing, A/B hero, API docs, live request console, and shareable style card" width="820" />
+</p>
+
+Point it at a running Style API server, authenticate, rate a stream of fashion images with a simple 👍 / 👎, and watch a personalized style profile take shape in real time. No backend of its own — it's a pure front-end tester that talks to any compatible Style API endpoint.
 
 ---
 
-## ✨ What it does
+## ✨ What's new in this release
 
-- **🔐 Authentication tab** — spin up a session against the API with an access ID and a gender preset.
-- **🖼️ Suggestions tab** — the heart of it: get an outfit, hit 👍 or 👎, and the API serves the next
-  one, iterating up to 30 rounds while it quietly learns your taste.
-- **📊 Profile tab** — a live chart of your top styles plus a full selection history (what you saw,
-  what you picked, and how each choice nudged your score).
-- **🔌 Configurable API endpoint** — a built-in field lets you point the tester at any compatible
-  Style API server (production, staging, or a local mock). Your choice is remembered in the browser.
-- **📚 API Documentation page** — every endpoint laid out with copy-paste `curl`, Python, and
-  JavaScript snippets, so integrators can get going in minutes.
-- **🩺 API Status page** — a quick health board that pings the core endpoints and shows what's up.
-- **📱 Fully responsive** — from a wide desktop dashboard down to a one-thumb mobile layout.
+This round was a top-to-bottom glow-up. The headline acts:
+
+- **🖤 A brand-new editorial landing page** — a fashion-magazine aesthetic with a Fraunces display serif, warm bone paper, a vermilion accent, an animated style-word marquee, and staggered reveal-on-load. It's the first thing people see, and now it dresses the part.
+- **🖥️ API Console** *(new)* — a live request inspector that records **every** call the tester makes to the Style API (method, status, latency, full request/response bodies). Expand any request to copy it as a ready-to-run `curl`, filter by success/error, and export the whole session as JSON. No browser devtools required.
+- **🪪 Style Card** *(new)* — turn a finished profile into a poster-worthy, shareable summary of someone's taste, ready to export and show off.
+- **🧪 A/B landing heroes** *(new)* — two interchangeable hero treatments, switchable live with `?variant=b`, so you can test messaging without a rebuild.
+- **♿ Accessibility & performance pass** — skip-to-content link, visible keyboard focus rings, honest `aria-label`s, `prefers-reduced-motion` support, and **route-level code splitting** so the landing page paints fast and the heavy pages load on demand.
+- **🛡️ Robustness pass** — friendlier error and empty states across the tester, docs, status, and 404 pages.
+- **✅ A real test suite** — 31 unit tests (Vitest + Testing Library) plus a Playwright smoke spec and a GitHub Actions CI workflow.
+- **🔎 SEO & PWA polish** — Open Graph / Twitter cards, structured data, a web manifest with icons, `robots.txt`, a sitemap, and SPA routing that survives a hard refresh.
 
 ---
 
 ## 🖥️ A look around
 
-### Home
-![Home page](docs/media/home-desktop.png)
-
-### Style API Tester
-![Style API Tester](docs/media/tester-desktop.png)
-
-### API Documentation
-![API Documentation](docs/media/docs-desktop.png)
-
-### API Status board
-![API Status](docs/media/status-desktop.png)
-
-### Mobile
-It folds down neatly for small screens too:
+### The editorial landing (light & dark)
 
 <p>
-  <img src="docs/media/home-mobile.png" width="45%" alt="Home on mobile" />
+  <img src="docs/media/desktop-light.png" width="49%" alt="Editorial landing page in light mode" />
   &nbsp;
-  <img src="docs/media/tester-mobile.png" width="45%" alt="Tester on mobile" />
+  <img src="docs/media/desktop-dark.png" width="49%" alt="Editorial landing page in dark mode" />
+</p>
+
+### A/B hero — `variant B`
+
+Append `?variant=b` for a dark, split-layout "Fashion that learns you" hero:
+
+![Landing hero variant B](docs/media/desktop-variant-b.png)
+
+### API Console — inspect every request
+
+![API Console](docs/media/console.png)
+
+### Style Card — share your taste
+
+![Style Card](docs/media/style-card.png)
+
+### Mobile
+
+It folds down neatly for one-thumb use, too:
+
+<p>
+  <img src="docs/media/mobile.png" width="300" alt="Landing page on mobile" />
 </p>
 
 ---
 
+## 🧪 Landing hero A/B variants
+
+The home page has two interchangeable hero treatments for testing messaging and layout — no rebuild required:
+
+- **`/`** or **`/?variant=a`** — the editorial "Taste, turned into a profile." hero (default).
+- **`/?variant=b`** — a dark, split-layout "Fashion that learns you" hero with an action-first CTA and a stat strip.
+
+Your choice sticks in the browser (`localStorage`), and a link under the hero flips between them. Full details in [`docs/LANDING_VARIANTS.md`](docs/LANDING_VARIANTS.md).
+
+---
+
 ## 🚀 Getting started (from zero)
+
+**In a hurry?** One line, assuming you already have Node 18+:
+
+```bash
+git clone https://github.com/waleedsworld/style-suggestion-canvas.git && cd style-suggestion-canvas && npm install && npm run dev
+```
 
 New to Node? No worries — here's the whole thing, copy-paste-able.
 
@@ -92,26 +128,24 @@ npm install
 npm run dev
 ```
 
-Vite will print a local URL (usually **http://localhost:8080**). Open it and you're in. 🎉
-The dev server hot-reloads, so edits show up instantly.
+Vite will print a local URL (usually **http://localhost:8080**). Open it and you're in. 🎉 The dev server hot-reloads, so edits show up instantly.
 
-### 4. Build for production
+### 4. Build & test
 
 ```bash
 npm run build     # outputs a static bundle to dist/
 npm run preview   # serve the built bundle locally to sanity-check it
+npm test          # run the Vitest unit suite
+npm run test:e2e  # run the Playwright smoke test (needs a preview server)
 ```
 
-Because the output is fully static, you can host `dist/` anywhere — Cloudflare Pages, Netlify,
-GitHub Pages, an S3 bucket, or your own box.
+Because the output is fully static, you can host `dist/` anywhere — Cloudflare Pages, Netlify, GitHub Pages, an S3 bucket, or your own box.
 
 ---
 
 ## 🔧 Pointing it at your own API
 
-By default the tester talks to a hosted Style API. To use a different server, just open the
-**Style API Tester → Authentication** tab and change the **API Endpoint** field, then hit **Save**.
-The value is stored in `localStorage`, so it sticks between visits — no rebuild needed.
+By default the tester talks to a hosted Style API. To use a different server, open the **Style API Tester → Authentication** tab and change the **API Endpoint** field, then hit **Save**. The value is stored in `localStorage`, so it sticks between visits — no rebuild needed.
 
 The API contract, in a nutshell:
 
@@ -123,7 +157,7 @@ The API contract, in a nutshell:
 | `GET`  | `/api/preference/{id}/profile` | Fetch the learned style profile |
 | `POST` | `/api/preference/{id}/profile` | Persist the profile |
 
-The in-app **API Documentation** page has the full request/response details and ready-to-run snippets.
+The in-app **API Documentation** page has the full request/response details and ready-to-run snippets — and the **API Console** shows every one of these calls as it happens.
 
 ---
 
@@ -132,10 +166,11 @@ The in-app **API Documentation** page has the full request/response details and 
 - **Vite** — lightning-fast dev server & bundler
 - **React 18** + **TypeScript** — typed, component-driven UI
 - **Tailwind CSS** + **shadcn/ui** (Radix primitives) — the design system
-- **React Router** — client-side routing across the four pages
+- **React Router** (with lazy routes) — client-side routing and code splitting
 - **TanStack Query** — data/query plumbing
 - **Recharts** — the style-profile visualizations
 - **Sonner** — the toast notifications
+- **Vitest** + **Testing Library** + **Playwright** — the test suite
 
 ---
 
@@ -143,22 +178,36 @@ The in-app **API Documentation** page has the full request/response details and 
 
 ```
 src/
-├── components/          # ImageCard, PreferenceChart, ApiStatusIndicator, ui/ (shadcn)
-├── hooks/               # use-mobile, use-toast
-├── pages/               # Index, StyleAPI, ApiDocs, ApiStatus, NotFound
+├── components/          # ImageCard, PreferenceChart, HeroVariantB, ApiStatusIndicator, ui/ (shadcn)
+├── hooks/               # use-mobile, use-toast, use-variant, useApiLog
+├── pages/               # Index, StyleAPI, ApiDocs, ApiStatus, ApiConsole, StyleCard, NotFound
 ├── services/
-│   └── StyleApiClient.ts  # all the API calls + session/iteration bookkeeping
+│   ├── StyleApiClient.ts  # all the API calls + session/iteration bookkeeping
+│   └── apiLog.ts          # the request-log store that powers the API Console
 └── main.tsx
+e2e/                     # Playwright smoke test
+docs/                    # TESTING.md, LANDING_VARIANTS.md, media/
 ```
 
-`StyleApiClient.ts` is where the interesting logic lives: session persistence, iteration counting,
-and graceful handling of the "no more images" / "invalid iteration" edge cases.
+`StyleApiClient.ts` is where the interesting logic lives: session persistence, iteration counting, and graceful handling of the "no more images" / "invalid iteration" edge cases. Every request it makes is piped through `apiLog.ts`, which is what the API Console renders.
+
+---
+
+## ✅ Testing
+
+```bash
+npm test            # Vitest unit + component tests (jsdom)
+npm run test:coverage
+npm run test:e2e    # Playwright end-to-end smoke test
+```
+
+Details and conventions live in [`docs/TESTING.md`](docs/TESTING.md). CI runs the unit suite and a production build on every push (see `.github/workflows/ci.yml`).
 
 ---
 
 ## 🌐 Live demo
 
-Live demo — deploying soon.
+It's live at **[ethos.techrealm.online](https://ethos.techrealm.online)** — no install required, just open it and start rating outfits. The tester ships pointed at a hosted Style API, so it works out of the box; swap in your own endpoint any time from the **Authentication** tab.
 
 ---
 
