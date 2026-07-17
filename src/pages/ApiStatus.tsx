@@ -212,7 +212,7 @@ const ApiStatus = () => {
           <div className="text-center text-sm text-muted-foreground">
             <p>This is an open-source status page.</p>
             <p>
-              Powered by Style API • Made by techrealm.pk • {new Date().getFullYear()}
+              Powered by the Style API • Built by Waleed Ajmal • {new Date().getFullYear()}
             </p>
           </div>
         </div>

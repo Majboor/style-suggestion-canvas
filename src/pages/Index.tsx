@@ -15,19 +15,21 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-white border-b border-gray-200 py-4">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-800">Style API Project</h1>
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Style Suggestion Canvas</h1>
+            <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
               <Link to="/style-api">
-                <Button variant="outline" className="flex items-center gap-2">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
                   <ImageIcon className="h-4 w-4" />
-                  Style API Tester
+                  <span className="hidden sm:inline">Style API Tester</span>
+                  <span className="sm:hidden">Tester</span>
                 </Button>
               </Link>
               <Link to="/api-docs">
-                <Button variant="outline" className="flex items-center gap-2">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
                   <BookText className="h-4 w-4" />
-                  API Documentation
+                  <span className="hidden sm:inline">API Documentation</span>
+                  <span className="sm:hidden">Docs</span>
                 </Button>
               </Link>
             </div>
@@ -42,15 +44,15 @@ const Index = () => {
             <p className="text-lg text-gray-600 mb-6">
               Build personalized style profiles through iterative user feedback.
             </p>
-            <div className="flex justify-center gap-4">
-              <Link to="/style-api">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/style-api" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
                   Try the Style API
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link to="/api-docs">
-                <Button size="lg" variant="outline">
+              <Link to="/api-docs" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto">
                   View API Documentation
                   <BookText className="ml-2 h-4 w-4" />
                 </Button>
@@ -125,10 +127,16 @@ const Index = () => {
               Users rate fashion images, and the system learns their preferences to create a personalized style profile.
             </p>
             <div className="flex justify-center mt-6">
-              <Button variant="outline" size="sm" className="flex items-center gap-2">
-                <Github className="h-4 w-4" />
-                View on GitHub
-              </Button>
+              <a
+                href="https://github.com/waleedsworld/style-suggestion-canvas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <Github className="h-4 w-4" />
+                  View on GitHub
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -137,7 +145,7 @@ const Index = () => {
       <footer className="bg-white border-t border-gray-200 py-6">
         <div className="container mx-auto px-4">
           <p className="text-center text-gray-600 text-sm">
-            Style API Project • Made by techrealm.pk • {new Date().getFullYear()}
+            Style Suggestion Canvas • Built by Waleed Ajmal • {new Date().getFullYear()}
           </p>
         </div>
       </footer>
