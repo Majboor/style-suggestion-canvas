@@ -55,6 +55,7 @@ const StyleAPI = () => {
   const [accessId, setAccessId] = useState("");
   const [gender, setGender] = useState("women");
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [apiBaseUrl, setApiBaseUrl] = useState(styleApiClient.getApiBaseUrl());
   
   const [newPreferenceId, setNewPreferenceId] = useState("");
   const [newAiId, setNewAiId] = useState("");
@@ -403,6 +404,37 @@ const StyleAPI = () => {
                 <CardDescription>Authenticate to use the Style API</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="api-base-url">API Endpoint</Label>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Input
+                      id="api-base-url"
+                      value={apiBaseUrl}
+                      onChange={(e) => setApiBaseUrl(e.target.value)}
+                      placeholder="https://your-api.example.com/api"
+                      disabled={styleApiClient.isAuthenticated}
+                    />
+                    <Button
+                      variant="outline"
+                      className="shrink-0"
+                      disabled={styleApiClient.isAuthenticated}
+                      onClick={() => {
+                        styleApiClient.setApiBaseUrl(apiBaseUrl);
+                        setApiBaseUrl(styleApiClient.getApiBaseUrl());
+                        toast.success("API endpoint saved", {
+                          description: styleApiClient.getApiBaseUrl(),
+                        });
+                      }}
+                    >
+                      <Save className="h-4 w-4 mr-1" />
+                      Save
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Point the tester at any compatible Style API server. Saved locally in your browser.
+                  </p>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="access-id">Access ID</Label>
                   <div className="flex space-x-2">
@@ -923,7 +955,7 @@ const StyleAPI = () => {
       <footer className="border-t border-gray-200 py-6 mt-12">
         <div className="container mx-auto px-4">
           <p className="text-center text-sm text-muted-foreground">
-            Style API Tester • Made by techrealm.pk • {new Date().getFullYear()}
+            Style Suggestion Canvas • Built by Waleed Ajmal • {new Date().getFullYear()}
           </p>
         </div>
       </footer>

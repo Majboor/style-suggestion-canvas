@@ -37,7 +37,10 @@ class StyleApiClient {
   private currentIteration: number;
 
   constructor(baseUrl: string = "https://haider.techrealm.online/api") {
-    this.apiBaseUrl = baseUrl;
+    // Allow the endpoint to be overridden at runtime (handy for pointing the
+    // tester at a staging server or a local mock) and remember the choice.
+    const storedBaseUrl = localStorage.getItem("style_api_base_url");
+    this.apiBaseUrl = storedBaseUrl && storedBaseUrl.trim() ? storedBaseUrl.trim() : baseUrl;
     this.aiId = localStorage.getItem("style_ai_id");
     this.preferenceId = localStorage.getItem("style_preference_id");
     
@@ -49,6 +52,18 @@ class StyleApiClient {
 
   get isAuthenticated(): boolean {
     return !!this.aiId && !!this.preferenceId;
+  }
+
+  getApiBaseUrl(): string {
+    return this.apiBaseUrl;
+  }
+
+  setApiBaseUrl(url: string) {
+    const trimmed = url.trim().replace(/\/+$/, "");
+    if (!trimmed) return;
+    this.apiBaseUrl = trimmed;
+    localStorage.setItem("style_api_base_url", trimmed);
+    console.log(`API base URL set to: ${trimmed}`);
   }
 
   setSessionData(aiId: string, preferenceId: string) {
